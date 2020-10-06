@@ -1,25 +1,72 @@
 import * as React from 'react';
+import {View, Text, Pressable, Image} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Satu from './components/Satu';
-import Dua from './components/Dua';
-import Tiga from './components/Tiga';
-import Empat from './components/Empat';
-import Lima from './components/Lima';
-import Enam from './components/Enam';
+
+import DeviceInfoDemo from './components/DeviceInfoDemo';
+import NetworkInfo from './components/NetworkInfo';
+import ImagePickerDemo from './components/ImagePickerDemo';
+import ShareMessageAndFile from './components/ShareMessageAndFile';
+
+const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+
+function HomeScreen() {
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+function MyStack({navigation}) {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          title: 'Showcase App',
+          headerLeft: () => (
+            <Pressable
+              onPress={() => navigation.openDrawer()}
+              style={{paddingLeft: 10}}>
+              <Image
+                style={{width: 50}}
+                source={{
+                  uri:
+                    'https://www.iconfinder.com/data/icons/mini-icon-set-general-office/91/General_-_Office_30-512.png',
+                }}
+              />
+            </Pressable>
+          ),
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 function MyDrawer() {
   return (
-    <Drawer.Navigator initialRouteName="HalLima">
-      <Drawer.Screen name="HalLima" component={Lima} />
-      <Drawer.Screen name="HalEnam" component={Enam} />
+    <Drawer.Navigator initialRouteName="HalLima" initialRouteName="Home">
+      <Drawer.Screen name="Home" component={MyStack} />
+      <Drawer.Screen name="DeviceInfoDemo" component={DeviceInfoDemo} />
+      <Drawer.Screen name="NetworkInfo" component={NetworkInfo} />
+      <Drawer.Screen name="ImagePickerDemo" component={ImagePickerDemo} />
+      <Drawer.Screen
+        name="ShareMessageAndFile"
+        component={ShareMessageAndFile}
+      />
     </Drawer.Navigator>
   );
 }
+
 export default function App() {
+  const navigationRef = React.useRef(null);
+
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <MyDrawer />
     </NavigationContainer>
   );
