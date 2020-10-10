@@ -8,9 +8,6 @@ import DeviceInfoDemo from './components/DeviceInfoDemo';
 import NetworkInfo from './components/NetworkInfo';
 import ImagePickerDemo from './components/ImagePickerDemo';
 import ShareMessageAndFile from './components/ShareMessageAndFile';
-import ClipboardDemo from './components/ClipboardDemo';
-import GeolocationDemo from './components/GeolocationDemo';
-import AudioDemo from './components/AudioDemo';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -61,9 +58,6 @@ function MyDrawer() {
         name="ShareMessageAndFile"
         component={ShareMessageAndFile}
       />
-      <Drawer.Screen name="ClipboardDemo" component={ClipboardDemo} />
-      <Drawer.Screen name="GeolocationDemo" component={GeolocationDemo} />
-      <Drawer.Screen name="AudioDemo" component={AudioDemo} />
     </Drawer.Navigator>
   );
 }
